@@ -2,7 +2,7 @@
 import './App.css';
 
 function App() {
-  return <div className="App">Main</div>;
+  return <h1>Ultimate React form</h1>;
 }
 
 export default App;

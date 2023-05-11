@@ -1,7 +1,11 @@
+//REACT
 import React from 'react';
 
+//COMPONENTS
+import { Typography } from '@mui/material';
+
 const Header = () => {
-  return <h1>Ultimate React Form</h1>;
+  return <Typography></Typography>;
 };
 
 export default Header;
