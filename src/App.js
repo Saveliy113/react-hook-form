@@ -1,8 +1,9 @@
 //Css
 import './App.css';
+import Header from './components/Header';
 
 function App() {
-  return <h1>Ultimate React form</h1>;
+  return <Header>Ultimate form challenge</Header>;
 }
 
 export default App;
