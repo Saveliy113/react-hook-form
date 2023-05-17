@@ -1,10 +1,13 @@
+//REACT
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+
+//COMPONENTS
 import MainContainer from './MainContainer';
 import { Typography } from '@mui/material';
 import Form from './Form';
 import Input from './Input';
-import { useForm } from 'react-hook-form';
 import PrimaryButton from './PrimaryButton';
 import { object, string } from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -38,7 +41,6 @@ const Step1 = () => {
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          ref={register}
           id="firstName"
           type="text"
           label="First Name"
