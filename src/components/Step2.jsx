@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useData } from '../DataContext';
 
 //COMPONENTS
 import MainContainer from './MainContainer';
@@ -21,7 +22,6 @@ const schema = object({
 });
 
 const normalizePhoneNumber = (value) => {
-  console.log('Value changed');
   const phoneNumber = parsePhoneNumberFromString(value);
 
   if (!phoneNumber) {
@@ -34,6 +34,8 @@ const normalizePhoneNumber = (value) => {
 const Step2 = () => {
   const navigate = useNavigate();
 
+  const { data, setValues } = useData();
+
   const {
     register,
     handleSubmit,
@@ -41,10 +43,18 @@ const Step2 = () => {
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
+    defaultValues: {
+      email: data.email,
+      hasPhone: data.hasPhone,
+      phoneNumber: data.phoneNumber,
+    },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = () => navigate('/step3');
+  const onSubmit = (data) => {
+    setValues(data);
+    navigate('/step3');
+  };
 
   const hasPhone = watch('hasPhone');
 
@@ -55,9 +65,6 @@ const Step2 = () => {
       </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          onChange={(e) => {
-            console.log(e);
-          }}
           id="email"
           type="email"
           label="Email"
@@ -71,6 +78,8 @@ const Step2 = () => {
           label="Do you have a phone?"
           control={
             <Checkbox
+              defaultValue={data.hasPhone}
+              defaultChecked={data.hasPhone}
               name="hasPhone"
               {...register('hasPhone')}
               color="primary"

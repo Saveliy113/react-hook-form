@@ -2,6 +2,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { useData } from '../DataContext';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { object, string } from 'yup';
 
 //COMPONENTS
 import MainContainer from './MainContainer';
@@ -9,8 +12,6 @@ import { Typography } from '@mui/material';
 import Form from './Form';
 import Input from './Input';
 import PrimaryButton from './PrimaryButton';
-import { object, string } from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 const schema = object({
   firstName: string()
@@ -23,16 +24,21 @@ const schema = object({
 
 const Step1 = () => {
   const navigate = useNavigate();
+  const { data, setValues } = useData();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
     mode: 'onBlur',
+    defaultValues: { firstName: data.firstName, lastName: data.lastName },
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = () => navigate('/step2');
+  const onSubmit = (data) => {
+    navigate('/step2');
+    setValues(data);
+  };
 
   return (
     <MainContainer>

@@ -2,6 +2,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useData } from '../DataContext';
 
 //COMPONENTS
 import MainContainer from './MainContainer';
@@ -12,10 +13,14 @@ import PrimaryButton from './PrimaryButton';
 
 const Step3 = () => {
   const navigate = useNavigate();
-  const { control, handleSubmit } = useForm();
+  const { data, setValues } = useData();
+  const { control, handleSubmit } = useForm({
+    defaultValues: { files: data.files },
+  });
 
   const onSubmit = (data) => {
     navigate('/result');
+    setValues(data);
   };
 
   return (

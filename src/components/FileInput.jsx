@@ -13,8 +13,8 @@ import {
 import Dropzone from 'react-dropzone';
 
 //ICONS
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import FileIcon from '@mui/icons-material/InsertDriveFile';
 
 //CSS
 import styles from './FileInput.module.scss';
@@ -44,7 +44,7 @@ const FileInput = ({ control, name }) => {
             {value.map((file, index) => (
               <ListItem key={index}>
                 <ListItemIcon>
-                  <FileIcon />
+                  <InsertDriveFileIcon />
                 </ListItemIcon>
                 <ListItemText primary={file.name} secondary={file.size} />
               </ListItem>
