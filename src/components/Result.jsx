@@ -61,10 +61,10 @@ const Result = () => {
   if (success) {
     return <Confetti />;
   }
-  
+
   return (
     <MainContainer>
-      <Typography component="h2" variant="h5">
+      <Typography className={styles.resultHeader} component="h2" variant="h5">
         📋 Form values
       </Typography>
       <TableContainer className={styles.root} component={Paper}>
@@ -79,7 +79,13 @@ const Result = () => {
             {entries.map((entry) => (
               <TableRow key={entry[0]}>
                 <TableCell>{entry[0]}</TableCell>
-                <TableCell align="right">{entry[1].toString()}</TableCell>
+                <TableCell align="right">
+                  {entry[1].toString() === 'true'
+                    ? '✔'
+                    : entry[1].toString() === 'false'
+                    ? '❌'
+                    : entry[1].toString()}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
